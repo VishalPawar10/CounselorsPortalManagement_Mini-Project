@@ -1,7 +1,16 @@
-package in.ashokit.repo;
+package in.ashokit.entity;
 
-import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "enquiries_tbl")
@@ -9,7 +18,7 @@ public class Enquiry {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long enqId;
+	private Integer enqId;
 
 	@Column(nullable = false)
 	private String studentName;
@@ -26,26 +35,21 @@ public class Enquiry {
 	@Column(nullable = false)
 	private String enqStatus;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate = new Date();
+	@CreationTimestamp
+	private LocalDate createdDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedDate;
+	@UpdateTimestamp
+	private LocalDate updatedDate;
 
 	@ManyToOne
 	@JoinColumn(name = "counsellor_id", nullable = false)
 	private Counsellors counsellor;
 
-	@PreUpdate
-	protected void onUpdate() {
-		updatedDate = new Date();
-	}
-
-	public Long getEnqId() {
+	public Integer getEnqId() {
 		return enqId;
 	}
 
-	public void setEnqId(Long enqId) {
+	public void setEnqId(Integer enqId) {
 		this.enqId = enqId;
 	}
 
@@ -89,19 +93,19 @@ public class Enquiry {
 		this.enqStatus = enqStatus;
 	}
 
-	public Date getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getUpdatedDate() {
+	public LocalDate getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
+	public void setUpdatedDate(LocalDate updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

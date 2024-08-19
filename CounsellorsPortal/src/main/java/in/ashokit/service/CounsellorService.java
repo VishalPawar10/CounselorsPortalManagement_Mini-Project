@@ -1,21 +1,21 @@
 package in.ashokit.service;
 
 import java.util.List;
-import java.util.Optional;
-import in.ashokit.repo.Counsellors;
+
+import in.ashokit.dto.DashboardResponse;
+import in.ashokit.entity.Counsellors;
 
 	public interface CounsellorService {
 
-	    Counsellors createCounsellor(Counsellors counsellor);
-
-	    Optional<Counsellors> getCounsellorById(Long counsellorId);
+	    public Counsellors createCounsellor(Counsellors counsellor);
+	    
+	    public Counsellors login(String email, String pwd);
 
 	    List<Counsellors> getAllCounsellors();
 
-	    Counsellors updateCounsellor(Counsellors counsellor);
+		public DashboardResponse getDashboardInfo(Integer counsellorId);
 
 	    void deleteCounsellor(Long counsellorId);
 
-	    Optional<Counsellors> findByEmail(String email);
 	}
 

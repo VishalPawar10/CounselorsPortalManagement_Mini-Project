@@ -1,9 +1,11 @@
-package in.ashokit.repo;
+package in.ashokit.entity;
 
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "counsellors_tbl")
@@ -11,7 +13,7 @@ public class Counsellors {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long counsellorId;
+	private Integer counsellorId;
 
 	@Column(nullable = false)
 	private String name;
@@ -24,10 +26,9 @@ public class Counsellors {
 
 	private String phno;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate = new Date();
-
-	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private LocalDate createdDate;
+	@UpdateTimestamp
 	private Date updatedDate;
 
 	// Getters and Setters
@@ -37,11 +38,11 @@ public class Counsellors {
 		updatedDate = new Date();
 	}
 
-	public Long getCounsellorId() {
+	public Integer getCounsellorId() {
 		return counsellorId;
 	}
 
-	public void setCounsellorId(Long counsellorId) {
+	public void setCounsellorId(Integer counsellorId) {
 		this.counsellorId = counsellorId;
 	}
 
@@ -77,11 +78,11 @@ public class Counsellors {
 		this.phno = phno;
 	}
 
-	public Date getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 

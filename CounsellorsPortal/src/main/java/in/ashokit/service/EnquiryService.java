@@ -1,18 +1,19 @@
 package in.ashokit.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import in.ashokit.repo.Enquiry;
+import in.ashokit.dto.ViewEnqFilterRequest;
+import in.ashokit.entity.Enquiry;
 
 public interface EnquiryService {
 
 
-    Enquiry createEnquiry(Enquiry enquiry);
+	// add new enquiry 
+	public boolean addEnquiry(Enquiry enq, Integer counsellorId);
 
-    Optional<Enquiry> getEnquiryById(Long enqId);
+	public Enquiry getEnquriyById(Integer enqId);
 
-    List<Enquiry> getAllEnquiries();
+	public List<Enquiry> getAllEnquiries(Integer counsellorId);
 
     Enquiry updateEnquiry(Enquiry enquiry);
 
@@ -20,5 +21,6 @@ public interface EnquiryService {
 
     List<Enquiry> findByCounsellorId(Long counsellorId);
 
-    List<Enquiry> findByStatus(String status);
+	public List<Enquiry> getEnquiresWithFilter(ViewEnqFilterRequest filterReq, Integer counsellorId);
+
 }
