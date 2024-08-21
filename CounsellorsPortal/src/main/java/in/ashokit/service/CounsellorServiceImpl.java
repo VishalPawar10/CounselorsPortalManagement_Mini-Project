@@ -1,20 +1,28 @@
 package in.ashokit.service;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import in.ashokit.dto.DashboardResponse;
 import in.ashokit.entity.Counsellors;
+import in.ashokit.entity.Enquiry;
 import in.ashokit.repo.CounsellorsRepository;
+import in.ashokit.repo.EnquiryRepository;
 
 @Service
 public class CounsellorServiceImpl implements CounsellorService {
 	
 	private CounsellorsRepository repo;
+	
+	private EnquiryRepository erepo;
 
 	
-	public CounsellorServiceImpl(CounsellorsRepository repo) {
+	public CounsellorServiceImpl(CounsellorsRepository repo, EnquiryRepository erepo) {
 		this.repo = repo;
+		this.erepo = erepo;
 	}
 	
 	@Override
@@ -24,8 +32,12 @@ public class CounsellorServiceImpl implements CounsellorService {
 	}
 
 	@Override
-	public Counsellors createCounsellor(Counsellors counsellor) {
-		return repo.save(counsellor);
+	public boolean register(Counsellors counsellor) {
+		Counsellors save = repo.save(counsellor);
+		if(null != save.getCounsellorId()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -40,10 +52,27 @@ public class CounsellorServiceImpl implements CounsellorService {
 	@Override
 	public DashboardResponse getDashboardInfo(Integer counsellorId) {
 		DashboardResponse dr = new DashboardResponse();
-		dr.getTotalEnqs();
-		dr.getOpenEnqs();
-		dr.getEnrolledEnqs();
-		dr.getLostEnqs();
+		
+		List<Enquiry> list = erepo.findByCounsellor(counsellorId);
+		int totalEnqs = list.size();
+		
+		int enrolledEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
+			.collect(Collectors.toList())
+			.size();
+		
+		int lostEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
+				.collect(Collectors.toList())
+				.size();
+		
+		int openEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
+				.collect(Collectors.toList())
+				.size();
+
+		
+		dr.setTotalEnqs(totalEnqs);
+		dr.setOpenEnqs(openEnqs);
+		dr.setEnrolledEnqs(enrolledEnqs);
+		dr.setLostEnqs(lostEnqs);
 		return dr;
 	}
 

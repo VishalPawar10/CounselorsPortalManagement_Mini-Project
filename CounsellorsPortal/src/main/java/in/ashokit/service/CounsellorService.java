@@ -8,7 +8,7 @@ import in.ashokit.entity.Counsellors;
 		
 		public Counsellors checkDuplicate(String email);
 
-	    public Counsellors createCounsellor(Counsellors counsellor);
+	    public boolean register(Counsellors counsellor);
 	    
 	    public Counsellors login(String email, String pwd);
 

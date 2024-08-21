@@ -9,7 +9,7 @@ public interface EnquiryService {
 
 
 	// add new enquiry 
-	public boolean addEnquiry(Enquiry enq, Integer counsellorId);
+	public boolean addEnquiry(Enquiry enq, Integer counsellorId) throws Exception;
 
 	public Enquiry getEnquriyById(Integer enqId);
 
