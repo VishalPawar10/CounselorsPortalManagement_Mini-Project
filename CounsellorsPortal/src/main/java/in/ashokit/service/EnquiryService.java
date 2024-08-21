@@ -2,9 +2,12 @@ package in.ashokit.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import in.ashokit.dto.ViewEnqFilterRequest;
 import in.ashokit.entity.Enquiry;
 
+@Service
 public interface EnquiryService {
 
 

@@ -53,7 +53,7 @@ public class CounsellorServiceImpl implements CounsellorService {
 	public DashboardResponse getDashboardInfo(Integer counsellorId) {
 		DashboardResponse dr = new DashboardResponse();
 		
-		List<Enquiry> list = erepo.findByCounsellor(counsellorId);
+		List<Enquiry> list = erepo.getByCounsellorId(counsellorId);
 		int totalEnqs = list.size();
 		
 		int enrolledEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
