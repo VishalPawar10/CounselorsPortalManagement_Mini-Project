@@ -2,34 +2,36 @@ package in.ashokit.dto;
 
 public class DashboardResponse {
 
-	private Long totalEnqs;
-	private Long openEnqs;
-	private Long enrolledEnqs;
-	private Long lostEnqs;
-	
-	//Getters and Setters
-	public Long getTotalEnqs() {
+	private Integer totalEnqs;
+	private Integer openEnqs;
+	private Integer enrolledEnqs;
+	private Integer lostEnqs;
+
+	public Integer getTotalEnqs() {
 		return totalEnqs;
 	}
-	public void setTotalEnqs(Long totalEnqs) {
+	public void setTotalEnqs(Integer totalEnqs) {
 		this.totalEnqs = totalEnqs;
 	}
-	public Long getOpenEnqs() {
+	public Integer getOpenEnqs() {
 		return openEnqs;
 	}
-	public void setOpenEnqs(Long openEnqs) {
+	public void setOpenEnqs(Integer openEnqs) {
 		this.openEnqs = openEnqs;
 	}
-	public Long getEnrolledEnqs() {
+	public Integer getEnrolledEnqs() {
 		return enrolledEnqs;
 	}
-	public void setEnrolledEnqs(Long enrolledEnqs) {
+	public void setEnrolledEnqs(Integer enrolledEnqs) {
 		this.enrolledEnqs = enrolledEnqs;
 	}
-	public Long getLostEnqs() {
+	public Integer getLostEnqs() {
 		return lostEnqs;
 	}
-	public void setLostEnqs(Long lostEnqs) {
+	public void setLostEnqs(Integer lostEnqs) {
 		this.lostEnqs = lostEnqs;
 	}
+	
+	//Getters and Setters
+	
 }

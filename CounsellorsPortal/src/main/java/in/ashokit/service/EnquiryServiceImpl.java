@@ -25,23 +25,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return null;
 	}
 
-	@Override
-	public Enquiry updateEnquiry(Enquiry enquiry) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteEnquiry(Long enqId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Enquiry> findByCounsellorId(Long counsellorId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<Enquiry> getEnquiresWithFilter(ViewEnqFilterRequest filterReq, Integer counsellorId) {

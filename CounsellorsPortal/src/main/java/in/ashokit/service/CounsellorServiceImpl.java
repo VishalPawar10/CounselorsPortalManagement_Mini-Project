@@ -1,40 +1,55 @@
 package in.ashokit.service;
 
-import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import in.ashokit.dto.DashboardResponse;
 import in.ashokit.entity.Counsellors;
+import in.ashokit.repo.CounsellorsRepository;
 
+@Service
 public class CounsellorServiceImpl implements CounsellorService {
+	
+	private CounsellorsRepository repo;
+
+	
+	public CounsellorServiceImpl(CounsellorsRepository repo) {
+		this.repo = repo;
+	}
+	
+	@Override
+	public Counsellors checkDuplicate(String email) {
+	    Counsellors c = repo.findByEmail(email);
+	    return c;
+	}
 
 	@Override
 	public Counsellors createCounsellor(Counsellors counsellor) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.save(counsellor);
 	}
 
 	@Override
 	public Counsellors login(String email, String pwd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Counsellors> getAllCounsellors() {
-		// TODO Auto-generated method stub
-		return null;
+		Counsellors c = repo.findByEmailAndPwd(email, pwd);
+		if(c == null) {
+			throw new IllegalArgumentException("Invalid email or password");
+		}
+		return c;
 	}
 
 	@Override
 	public DashboardResponse getDashboardInfo(Integer counsellorId) {
-		// TODO Auto-generated method stub
-		return null;
+		DashboardResponse dr = new DashboardResponse();
+		dr.getTotalEnqs();
+		dr.getOpenEnqs();
+		dr.getEnrolledEnqs();
+		dr.getLostEnqs();
+		return dr;
 	}
 
 	@Override
-	public void deleteCounsellor(Long counsellorId) {
-		// TODO Auto-generated method stub
-
+	public void deleteCounsellor(Integer counsellorId) {
+		repo.deleteById(counsellorId);
 	}
 
 }

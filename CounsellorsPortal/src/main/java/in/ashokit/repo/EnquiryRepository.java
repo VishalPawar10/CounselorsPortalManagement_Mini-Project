@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import in.ashokit.entity.Enquiry;
 
-public interface EnquiryRepository extends JpaRepository<Enquiry, Long>{
+public interface EnquiryRepository extends JpaRepository<Enquiry, Integer>{
 
 	public List<Enquiry> findByCounsellor_CounsellorId(Long counsellorId);
 	

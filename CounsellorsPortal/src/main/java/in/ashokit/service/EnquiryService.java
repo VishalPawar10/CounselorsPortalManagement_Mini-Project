@@ -15,12 +15,6 @@ public interface EnquiryService {
 
 	public List<Enquiry> getAllEnquiries(Integer counsellorId);
 
-    Enquiry updateEnquiry(Enquiry enquiry);
-
-    void deleteEnquiry(Long enqId);
-
-    List<Enquiry> findByCounsellorId(Long counsellorId);
-
 	public List<Enquiry> getEnquiresWithFilter(ViewEnqFilterRequest filterReq, Integer counsellorId);
 
 }
