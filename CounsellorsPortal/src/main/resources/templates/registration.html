@@ -12,35 +12,49 @@
 <body>
 
 	<div class="container">
-		<h2>Login Form</h2>
+		<h2>Registration Page</h2>
 		<font style="color: green;">
 			<p th:text="${msg}"></p>
 		</font>
 		<font style="color: red;">
 			<p th:text="${emsg}"></p>
 		</font>
-		<form th:action="@{/login}" th:object="${counsellor}" method="post">
-			<div class="row g-3 align-items-center">
+		<form th:action="@{/register}" th:object="${counsellor}" method="post">
+			<div class="row g-1 align-items-center">
+				<div class="col-auto">
+					<label class="col-form-label">Name:</label>
+					<input type="text" th:field="*{name}" class="form-control" required />
+				</div>
+			</div>
+
+			<div class="row g-1 align-items-center">
 				<div class="col-auto">
 					<label class="col-form-label">Email:</label>
 					<input type="email" th:field="*{email}" class="form-control" required />
 				</div>
 			</div>
-			<div class="row g-3 align-items-center">
+
+			<div class="row g-1 align-items-center">
 				<div class="col-auto">
 					<label class="col-form-label">Password:</label>
 					<input type="password" th:field="*{pwd}" class="form-control" required />
 				</div>
 			</div>
+
+			<div class="row g-1 align-items-center">
+				<div class="col-auto">
+					<label class="col-form-label">Phno:</label>
+					<input type="number" th:field="*{phno}" class="form-control" required />
+				</div>
+			</div>
+
 			<div class="my-auto">
 				<br>
-				<input type="submit" value="Login" class="btn btn-primary"/>
+				<input type="submit" value="Register" class="btn btn-primary" />
 			</div>
-			<a href="register">Register Here</a>
+			<a href="/">Login Here</a>
 		</form>
-
 	</div>
-
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

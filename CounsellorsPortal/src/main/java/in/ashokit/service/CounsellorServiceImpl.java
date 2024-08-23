@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import in.ashokit.dto.DashboardResponse;
 import in.ashokit.entity.Counsellors;
@@ -42,11 +43,7 @@ public class CounsellorServiceImpl implements CounsellorService {
 
 	@Override
 	public Counsellors login(String email, String pwd) {
-		Counsellors c = repo.findByEmailAndPwd(email, pwd);
-		if(c == null) {
-			throw new IllegalArgumentException("Invalid email or password");
-		}
-		return c;
+		  return repo.findByEmailAndPwd(email, pwd);
 	}
 
 	@Override
@@ -60,11 +57,11 @@ public class CounsellorServiceImpl implements CounsellorService {
 			.collect(Collectors.toList())
 			.size();
 		
-		int lostEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
+		int lostEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Lost"))
 				.collect(Collectors.toList())
 				.size();
 		
-		int openEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Enrolled"))
+		int openEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Open"))
 				.collect(Collectors.toList())
 				.size();
 
@@ -72,13 +69,8 @@ public class CounsellorServiceImpl implements CounsellorService {
 		dr.setTotalEnqs(totalEnqs);
 		dr.setOpenEnqs(openEnqs);
 		dr.setEnrolledEnqs(enrolledEnqs);
-		dr.setLostEnqs(lostEnqs);
+	dr.setLostEnqs(lostEnqs);
 		return dr;
-	}
-
-	@Override
-	public void deleteCounsellor(Integer counsellorId) {
-		repo.deleteById(counsellorId);
 	}
 
 }

@@ -15,13 +15,11 @@ public class Counsellors {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer counsellorId;
 
-	@Column(nullable = false)
 	private String name;
-
-	@Column(nullable = false, unique = true)
+	
+	@Column(unique = true)
 	private String email;
 
-	@Column(nullable = false)
 	private String pwd;
 
 	private String phno;
@@ -94,11 +92,5 @@ public class Counsellors {
 		this.updatedDate = updatedDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Counsellor [counsellorId=" + counsellorId + ", name=" + name + ", email=" + email + ", pwd=" + pwd
-				+ ", phno=" + phno + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
-	}
-
-	// Constructors, toString(), hashCode(), equals() methods
+	
 }

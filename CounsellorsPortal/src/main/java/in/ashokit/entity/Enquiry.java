@@ -3,7 +3,6 @@ package in.ashokit.entity;
 import java.time.LocalDate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,19 +19,14 @@ public class Enquiry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer enqId;
 
-	@Column(nullable = false)
 	private String studentName;
 
-	@Column(nullable = false)
 	private String studentPhno;
 
-	@Column(nullable = false)
 	private String courseName;
 
-	@Column(nullable = false)
 	private String classMode;
 
-	@Column(nullable = false)
 	private String enqStatus;
 
 	@CreationTimestamp
@@ -42,7 +36,7 @@ public class Enquiry {
 	private LocalDate updatedDate;
 
 	@ManyToOne
-	@JoinColumn(name = "counsellor_id", nullable = false)
+	@JoinColumn(name = "counsellor_id")
 	private Counsellors counsellor;
 
 	public Integer getEnqId() {
