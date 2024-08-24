@@ -12,28 +12,81 @@
 <body>
 
 	<div class="container">
-		<h2>Registration Page</h2>
-		<font style="color: green;">
-			<p th:text="${msg}"></p>
-		</font>
-		<font style="color: red;">
-			<p th:text="${emsg}"></p>
-		</font>
-		<form th:action="@{/addEnquiry}" th:object="${eObj}" method="post">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+					<div class="container-fluid">
+						<a class="navbar-brand" href="dashboard">Dashboard</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="enquiry">Add New Enquiry</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">View Enquiry</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="logout"
+									 onclick="return logoutConfirmation()"
+									>Logout</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</nav>
+		
+		<h2>Add Enquiry Here</h2>
+
+		<form th:action="@{/addEnquiry}" th:object="${enquiry}" method="post">
 			<div class="row g-1 align-items-center">
 				<div class="col-auto">
 					<label class="col-form-label">Name:</label>
-					<input type="text" th:field="*{name}" class="form-control" required />
+					<input type="text" th:field="*{studentName}" class="form-control" required />
 				</div>
 			</div>
 
 			<div class="row g-1 align-items-center">
 				<div class="col-auto">
 					<label class="col-form-label">Phno:</label>
-					<input type="number" th:field="*{phno}" class="form-control" required />
+					<input type="number" th:field="*{studentPhno}" class="form-control" required />
 				</div>
 			</div>
+			<br>
+			<div class="row g-1 align-items-center">
+				<div class="col-auto">
+					<select class="form-select form-select-sm" aria-label="Small select example">
+						<option selected>Class Mode</option>
+						<option value="1">Classroom</option>
+						<option value="2">Online</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row g-1 align-items-center">
+				<div class="col-auto">
+					<select class="form-select form-select-sm" aria-label="Small select example">
+						<option selected>Course</option>
+						<option value="1">AWS</option>
+						<option value="2">Java</option>
+						<option value="3">Python</option>
+					</select>
+				</div>
+			</div>
+			<br>
 
+			<div class="row g-1 align-items-center">
+				<div class="col-auto">
+					<select class="form-select form-select-sm" aria-label="Small select example">
+						<option selected>Status</option>
+						<option value="1">Open</option>
+						<option value="2">Enrolled</option>
+						<option value="3">Closed</option>
+					</select>
+				</div>
+			</div>
 			<div class="my-auto">
 				<br>
 				<input type="submit" value="Save" class="btn btn-primary" />

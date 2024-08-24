@@ -47,6 +47,16 @@ public class CounsellorController {
 		}
 		
 	}
+	
+	@GetMapping("/dashboard")
+	public String displayDashboardPage(HttpServletRequest request,Model model) {
+		HttpSession session = request.getSession(false);
+		Integer counsellorId = (Integer)session.getAttribute("counsellorId");
+
+		DashboardResponse dbObj = counsellorService.getDashboardInfo(counsellorId);
+		model.addAttribute("dashboardInfo", dbObj);
+		return "dashboard";
+	}
 
 	@GetMapping("/register")
 	public String registrationPage(Model model) {
@@ -72,6 +82,8 @@ public class CounsellorController {
 		}
 		return "registration";
 	}
+	
+	
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
