@@ -57,7 +57,7 @@ public class CounsellorServiceImpl implements CounsellorService {
 			.collect(Collectors.toList())
 			.size();
 		
-		int lostEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Lost"))
+		int lostEnqs = list.stream().filter(e -> e.getEnqStatus().equals("Closed"))
 				.collect(Collectors.toList())
 				.size();
 		

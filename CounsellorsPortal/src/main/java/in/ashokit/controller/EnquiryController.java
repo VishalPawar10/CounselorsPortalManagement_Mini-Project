@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import in.ashokit.dto.DashboardResponse;
+import in.ashokit.dto.ViewEnqFilterRequest;
 import in.ashokit.entity.Enquiry;
 import in.ashokit.service.CounsellorService;
 import in.ashokit.service.EnquiryService;
@@ -61,6 +62,10 @@ public class EnquiryController {
 		
 		List<Enquiry> enq = enquiryService.getAllEnquiries(counsellorId);
 		model.addAttribute("enquiry", enq);
+		
+		ViewEnqFilterRequest filterReq = new ViewEnqFilterRequest();
+		model.addAttribute("viewEnqFilter", filterReq);
+		
 		return "viewEnquiry";
 	}
 	
