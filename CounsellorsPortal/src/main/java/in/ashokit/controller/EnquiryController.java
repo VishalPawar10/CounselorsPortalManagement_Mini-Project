@@ -1,5 +1,7 @@
 package in.ashokit.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,7 @@ public class EnquiryController {
 		
 		boolean isSaved = enquiryService.addEnquiry(enquiry, counsellorId);
 		if(isSaved) {
-			model.addAttribute("smsg", "Enquiry Added Successfully!!!");
+			model.addAttribute("msg", "Enquiry Added Successfully!!!");
 		}else {
 			model.addAttribute("emsg", "Failed to Add Enquiry");
 		}
@@ -46,7 +48,20 @@ public class EnquiryController {
 		DashboardResponse dbObj = counsellorService.getDashboardInfo(counsellorId);
 		model.addAttribute("dashboardInfo", dbObj);
 		
+		enquiry = new Enquiry();
+		model.addAttribute("enquiry", enquiry);
 		return "addEnquiry";
+	}
+	
+	@GetMapping("/viewEnquiry")
+	public String getViewEnquiryPage(Enquiry enquiry,HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession(false);
+		Integer counsellorId = (Integer)session.getAttribute("counsellorId");
+		
+		List<Enquiry> enq = enquiryService.getAllEnquiries(counsellorId);
+		model.addAttribute("enquiry", enq);
+		return "viewEnquiry";
 	}
 	
 	
