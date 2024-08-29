@@ -68,10 +68,10 @@ public class EnquiryServiceImpl implements EnquiryService {
 			enq.setClassMode(filterReq.getClassMode());
 		
 		if(StringUtils.isNotEmpty(filterReq.getCourse()))
-			enq.setClassMode(filterReq.getCourse());
+			enq.setCourseName(filterReq.getCourse());
 		
 		if(StringUtils.isNotEmpty(filterReq.getStatus()))
-			enq.setClassMode(filterReq.getStatus());
+			enq.setEnqStatus(filterReq.getStatus());
 		
 		Counsellors counsellors = conRepo.findById(counsellorId).orElse(null);
 		enq.setCounsellor(counsellors);

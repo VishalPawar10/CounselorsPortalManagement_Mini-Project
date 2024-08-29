@@ -17,14 +17,14 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class EnquiryController {
-	
+
 	private EnquiryService enquiryService;
-	
+
 	private CounsellorService counsellorService;
-	
+
 	public EnquiryController(EnquiryService enquiryService, CounsellorService counsellorService) {
-		 this.enquiryService = enquiryService;
-		 this.counsellorService = counsellorService;
+		this.enquiryService = enquiryService;
+		this.counsellorService = counsellorService;
 	}
 
 	@GetMapping("/enquiry")
@@ -33,41 +33,58 @@ public class EnquiryController {
 		model.addAttribute("enquiry", eObj);
 		return "addEnquiry";
 	}
-	
+
 	@PostMapping("/addEnquiry")
 	public String AddEnquiryPage(Enquiry enquiry, HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession(false);
-		Integer counsellorId = (Integer)session.getAttribute("counsellorId");
-		
+		Integer counsellorId = (Integer) session.getAttribute("counsellorId");
+
 		boolean isSaved = enquiryService.addEnquiry(enquiry, counsellorId);
-		if(isSaved) {
+		if (isSaved) {
 			model.addAttribute("msg", "Enquiry Added Successfully!!!");
-		}else {
+		} else {
 			model.addAttribute("emsg", "Failed to Add Enquiry");
 		}
 
 		DashboardResponse dbObj = counsellorService.getDashboardInfo(counsellorId);
 		model.addAttribute("dashboardInfo", dbObj);
-		
+
 		enquiry = new Enquiry();
 		model.addAttribute("enquiry", enquiry);
 		return "addEnquiry";
 	}
-	
+
 	@GetMapping("/viewEnquiry")
-	public String getViewEnquiryPage(Enquiry enquiry,HttpServletRequest request, Model model) {
-		
+	public String getViewEnquiryPage(Enquiry enquiry, HttpServletRequest request, Model model) {
+
 		HttpSession session = request.getSession(false);
-		Integer counsellorId = (Integer)session.getAttribute("counsellorId");
-		
+		Integer counsellorId = (Integer) session.getAttribute("counsellorId");
+
 		List<Enquiry> enq = enquiryService.getAllEnquiries(counsellorId);
 		model.addAttribute("enquiry", enq);
-		
+
 		ViewEnqFilterRequest filterReq = new ViewEnqFilterRequest();
-		model.addAttribute("viewEnqFilter", filterReq);
-		
+		model.addAttribute("viewEnqFilterRequest", filterReq);
+
 		return "viewEnquiry";
 	}
-	
-	
+
+	@PostMapping("/filter-enqs")
+	public String filterEnquiryPage(ViewEnqFilterRequest viewEnqFilterRequest, HttpServletRequest request,
+			Model model) {
+		HttpSession session = request.getSession(false);
+		Integer counsellorId = (Integer) session.getAttribute("counsellorId");
+
+		// Perform the filtering
+		List<Enquiry> list = enquiryService.getEnquiresWithFilter(viewEnqFilterRequest, counsellorId);
+
+		// Add the filtered list to the model
+		model.addAttribute("enquiry", list);
+
+		// Add the filter request object back to the model for form binding
+		model.addAttribute("viewEnqFilterRequest", viewEnqFilterRequest);
+
+		return "viewEnquiry";
+	}
+
 }

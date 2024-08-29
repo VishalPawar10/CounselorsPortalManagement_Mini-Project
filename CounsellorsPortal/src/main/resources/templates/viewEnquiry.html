@@ -36,7 +36,7 @@
 
 		<h2>View Enquiry Here</h2>
 
-		<form th:action="@{/addEnquiry}" th:object="${viewEnqFilter}" method="post"
+		<form th:action="@{/filter-enqs}" th:object="${viewEnqFilterRequest}" method="post"
 			class="row row-cols-lg-auto g-3 align-items-center">
 
 			<div class="col">
@@ -75,6 +75,7 @@
 
 
 
+
 		<table class="table table-striped table-bordered">
 			<thead class="table-dark">
 				<tr class="text-center">
@@ -87,15 +88,17 @@
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
-				<tr class="text-center" th:each="enq : ${enquiry}">
-					<td th:text="${enq.enqId}"></td>
+				<tr class="text-center" th:each="enq,index : ${enquiry}">
+					<td th:text="${index.index+1}"></td>
 					<td th:text="${enq.studentName}"></td>
 					<td th:text="${enq.courseName}"></td>
 					<td th:text="${enq.classMode}"></td>
 					<td th:text="${enq.enqStatus}"></td>
 					<td><input type="button" value="Edit" class="btn btn-link"></td>
 				</tr>
-
+				<tr class="text-center" th:if="${enquiry.size()==0}">
+					<td colspan="6">No Records Found</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
